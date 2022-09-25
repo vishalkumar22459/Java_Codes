@@ -14,7 +14,7 @@ public class bankdetails {
 		
 	}
 	public static void debit() {
-		if(init==0) {	
+		if(init<=0) {	
 			System.out.println("Balance is 0 ....\nYou cannot debit from this account");
 			}
 		else {

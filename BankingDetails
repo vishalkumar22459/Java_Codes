@@ -1,0 +1,46 @@
+package bank;
+import java.util.*;
+public class bankdetails {
+	static Scanner sc = new Scanner(System.in);
+	static int init =0;
+	static String ch = "There is No transaction History...." ; 
+	public static void credit() {
+		int x;
+		System.out.print("Enter the amount to be credited : ");
+		x = sc.nextInt();
+		init = init+x;
+		System.out.println("Total Amount is : " + init);
+		ch = "your last transaction was crediting "+x+" \nAvailable balance is "+init;
+		
+	}
+	public static void debit() {
+		if(init==0) {	
+			System.out.println("Balance is 0 ....\nYou cannot debit from this account");
+			}
+		else {
+			int x;
+			System.out.print("Enter the amount to be debited : ");
+			x = sc.nextInt();
+			init = init-x;
+			System.out.println("Total Amount is : " + init);
+			ch = "your last transaction was debiting "+x+" \nAvailable balance is "+init;
+		}
+	}
+	public static void transaction() {
+		System.out.println(ch);
+		
+	}
+	public static void main(String[] args) {
+		int a;
+		System.out.println("Enter \n1.to Credit\n2.debit\n3.Display Transaction History\n4.to Exit");
+		for(;;) {
+			a = sc.nextInt();
+			switch(a) {
+			case 1 : credit();break;
+			case 2 : debit();break;
+			case 3 : transaction();break;
+			case 4 : System.exit(0);break;
+			}			
+		}
+	}
+}

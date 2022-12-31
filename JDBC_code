@@ -1,0 +1,73 @@
+
+
+package jdbc_package;
+
+import java.sql.*;
+
+public class create {
+
+	public static void main(String[] args) 
+		throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+	    System.out.println("Driver loaded");
+	    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/college","root", "Praneeth@11");
+	    System.out.println("Database connected");
+	    Statement stmt = connection.createStatement();
+	    String sql = "create table reg(id INTEGER not NULL, first VARCHAR(255),  last VARCHAR(255), age INTEGER, PRIMARY KEY ( id ))"; 
+        stmt.execute(sql);
+	    
+      System.out.println("Created table in given database...");
+      
+      
+	    connection.close();
+		  }
+}
+
+
+
+//Read  update delete
+
+package jdbc_package;
+
+import java.sql.*;
+public class demo1 {
+	  public static void main(String[] args)
+	      throws SQLException, ClassNotFoundException {
+	    Class.forName("com.mysql.cj.jdbc.Driver");
+	    System.out.println("Driver loaded");
+
+	    Connection connection = DriverManager.getConnection
+	      ("jdbc:mysql://localhost:3306/college","root", "Praneeth@11");
+	    System.out.println("Database connected");
+	    Statement statement = connection.createStatement();
+
+	    ResultSet resultSet = statement.executeQuery
+	      ("select * from student");
+	    System.out.printf("%-10s \t %-15s \t %-6s \t %-15s","Student ID","Student Branch","Stydent name","Pass out year");
+	    while (resultSet.next())
+	      System.out.printf("\n%10s \t %-15s \t %2s \t %15s",resultSet.getString(1) 
+	        , resultSet.getString(2), resultSet.getString(3) , resultSet.getString(5));
+	    
+	    System.out.println("\nUpdate command");
+	    String sql="update student SET poy=2020 where first_name='raj'";
+	    statement.executeUpdate(sql);
+	     ResultSet updateSet = statement.executeQuery("select * from student");
+	    System.out.printf("%-10s \t %-15s \t %-6s \t %-15s","Student ID","Student Branch","Student name","SPass out year");
+	    while (updateSet.next())
+	      System.out.printf("\n%10s \t %-15s \t %2s \t %15s",updateSet.getString(1) 
+	        , updateSet.getString(2), updateSet.getString(3) , updateSet.getString(5));
+	    
+	    
+	    
+	    System.out.println("\nDelete command");
+	    
+	    String delete="delete from student where first_name='raj'";
+	    statement.executeUpdate(delete);
+	     ResultSet deleteSet = statement.executeQuery("select * from student");
+	    System.out.printf("%-10s \t %-15s \t %-6s \t %-15s","Student ID","Student Branch","Student name","SPass out year");
+	    while (deleteSet.next())
+	      System.out.printf("\n%10s \t %-15s \t %2s \t %15s",deleteSet.getString(1) 
+	        , deleteSet.getString(2), deleteSet.getString(3) , deleteSet.getString(5));
+	    connection.close();
+	  }
+	}
